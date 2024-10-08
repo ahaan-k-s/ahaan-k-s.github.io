@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{mathtools}
+\usepackage{multicol}
+\begin{document}
+
+``Elementary proofs are nothing if not ways to think about something in all applicable cases so that repetitive testing on each possibility is not necessary"
+
+Mathematical proof is a very powerful tool, as it allows a statement to be proved or disproved absolutely. To understand the significance of this, it will help to consider a non-trivial example.
+\begin{lemma} \label{Lemma 1}
+    $7$ is the only prime number $p \in \mathbb{P}$ to be followed by a perfect cube.
+\end{lemma}
+\begin{proof}
+    Start by generalising the statement from $7 = 2^3 - 1$, to,
+    \begin{equation} \label{(1)}
+        p = n^3 - 1,\ p\in\mathbb{P},\ n\in\mathbb{N}.     
+    \end{equation}
+    It should be noted that the restriction of $n$ to $\mathbb{N}$ is strictly to avoid any $p\leq1$, as primes are not defined in this domain. $n^3 - 1$ can be factorised into $\left(n-1\right) \left(1 + n + n^2 \right)$, leaving,
+    \begin{equation*}
+        p = \left(n-1\right) \left(1 + n + n^2 \right).
+    \end{equation*}
+    Recall the definition of a prime number, namely, $\forall p \in \mathbb{P}$, $p$ can only be factorised into $p=\left(p \right) \left(1 \right)$. This implies that either $\left(n-1\right)$ or $\left(1 + n + n^2 \right)$ is equal to $1$. Considering the latter,
+    \begin{alignat*}{2}
+        && \ 1 + n + n^2 &= 1 \\
+        \Leftrightarrow&& n^2 + n &= 0 \\
+        \Leftrightarrow&& n\left(n + 1\right) &= 0 \\
+        \Rightarrow&& n_1,\ n_2 &= 0,\ -1
+    \end{alignat*}
+    As the solutions $\left\{0,\ -1\right\} \notin \mathbb{N}$, this only leaves,
+    \begin{alignat}{2}
+        && \ n - 1 &= 1 \nonumber \\
+        \label{(2)} \Leftrightarrow&& n &= 2.
+    \end{alignat}
+    Evaluating \eqref{(1)} at $n=2$,
+    \begin{alignat*}{2}
+        && \ p &= 2^3 - 1 \\
+        \Leftrightarrow&& 7 &= 2^3 - 1 \tag{as was postulated}.
+    \end{alignat*}
+    \eqref{(2)} was shown to satisfy the conditions of \eqref{(1)}, and is a unique solution. Hence, it follows that $7$ is the only prime to be followed by a cube.
+\end{proof}
+The above demonstrates the power of mathematics in dealing with a potentially troublesome, and certainly not obvious, lemma. With an infinite number of primes and cubes, reasonably straightforward arithmetical reasoning is still able to prove the lemma absolutely.
+
+\begin{theorem}
+    The following expression always outputs integer values for integer inputs,
+    \begin{equation} \label{(3)}
+        \frac{1}{\sqrt{5}} \Bigg[\left(\frac{1+\sqrt{5}}{2}\right)^{\!\!n}-\left(\frac{1-\sqrt{5}}{2}\right)^{\!\!n}\Bigg].
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Testing for $n=0$,
+    \begin{equation*}
+        \left. \frac{1}{\sqrt{5}} \Bigg[\left(\frac{1+\sqrt{5}}{2}\right)^{\!\!n}-\left(\frac{1-\sqrt{5}}{2}\right)^{\!\!n}\Bigg] \right\rvert_{n=0} = 0.
+    \end{equation*}
+    Now testing for $n=1$,
+    \begin{equation*}
+        \left. \frac{1}{\sqrt{5}} \Bigg[\left(\frac{1+\sqrt{5}}{2}\right)^{\!\!n}-\left(\frac{1-\sqrt{5}}{2}\right)^{\!\!n}\Bigg] \right\rvert_{n=1} = 1.
+    \end{equation*}
+    Continuing with successive evaluation produces the following sequence of integers, starting from $n=0$,
+    \begin{equation*}
+        0,\ 1,\ 1,\ 2,\ 3,\ 5,\ 8,\ 13,\ 21,\ \cdots.
+    \end{equation*}
+    Notice that this sequence is exactly the traditional Fibonacci Sequence. Consider the mechanics by which the sequence reproduces, namely, it is the successive summation of the previous two integers. Therefore, the expression \eqref{(3)} can be written as the recursion,
+    \begin{equation} \label{(4)}
+        F_n = F_{n-1} + F_{n-2},
+    \end{equation}
+    with initial conditions,
+    \begin{equation} \label{(5)}
+        F_0 = 0,\ F_1 = 1.
+    \end{equation}
+    \eqref{(4)} can be called a $2^\text{nd}$ order difference equation. This means that to arrive at the solution, a method similar to that of solving differential equations can be used. In particular, begin by finding non-zero constants $r_1$ and $r_2$, such that they are solutions of \eqref{(4)},
+    \begin{equation} \label{(6)}
+        F_n = r_1^n,\ \text{and}\ F_n = r_2^n,
+    \end{equation}
+    along with constants $A$ and $B$ such that $F_n$ satisfies the initial conditions \eqref{(5)}, namely,
+    \begin{equation} \label{(7)}
+        F_n = Ar_1^n + Br_2^n.
+    \end{equation}
+    Start by determining the value of $r_1$ and $r_2$,
+    \begin{alignat}{2}
+        && r^n &= r^{n-1} + r^{n-2} \nonumber \tag{by substituting \eqref{(6)} into \eqref{(4)}} \nonumber \\
+        \Leftrightarrow&& \ r^n - r^{n-1} - r^{n-2} &= 0 \nonumber \\
+        \Leftrightarrow&& r^{n-2} \left(r^2 - r - 1 \right) &= 0 \nonumber \\
+        \Leftrightarrow&& r^2 - r - 1 &= 0 \nonumber \tag{$r^{n-2} \neq 0$} \\
+        \label{(8)} \Rightarrow&& r_1,\ r_2 &= \frac{1\pm\sqrt{5}}{2} = \varphi,\ \psi.
+    \end{alignat}
+    Having solved for $r_1$ and $r_2$, now solve for $A$ and $B$,
+    \begin{alignat}{2}
+        && F_n &= A\varphi^n + B\psi^n \nonumber \tag{using \eqref{(7)} and \eqref{(8)}} \\
+        \Rightarrow&& F_0 &= A + B \nonumber \\
+        \Leftrightarrow&& A + B &= 0 \nonumber \tag{By \eqref{(5)}} \\
+        \label{(9)} \Leftrightarrow&& B &= -A \\
+        \Rightarrow&& F_1 &= A\varphi - A\psi \nonumber \tag{\eqref{(9)} into \eqref{(7)}, using \eqref{(8)}} \\ \Leftrightarrow&& \ A\left(\varphi - \psi\right) &= F_1 \nonumber \\
+        \Leftrightarrow&& \ A\left(\varphi - \psi\right) &= 1 \nonumber \tag{by \eqref{(5)}} \\
+        \Leftrightarrow&& A &= \frac{1}{\varphi -\psi} \nonumber \\ \label{(10)} \Rightarrow&& A,\ B &= \frac{1}{\sqrt{5}},\ \frac{-1}{\sqrt{5}}.
+    \end{alignat}
+    Finally, evaluate $F_n$,
+    \begin{alignat}{2}
+        && F_n &= \frac{1}{\sqrt{5}} \varphi^n - \frac{1}{\sqrt{5}} \psi^n \nonumber \tag{\eqref{(8)} and \eqref{(10)} in \eqref{(7)}} \\
+        \Leftrightarrow&& F_n &= \frac{1}{\sqrt{5}} \left(\varphi^n - \psi^n \right) \nonumber \\
+        \label{(11)}\Leftrightarrow&& \ F_n &= \frac{1}{\sqrt{5}} \Bigg[\left(\frac{1+\sqrt{5}}{2}\right)^{\!\!n}-\left(\frac{1-\sqrt{5}}{2}\right)^{\!\!n}\Bigg].
+    \end{alignat}
+    \eqref{(11)} is identical to \eqref{(3)}, and is the unique solution to the recurrence relation \eqref{(4)}, with initial conditions \eqref{(5)}. Since $F_n$ is defined as the iterative summation of preceding integers, it will strictly produce successive integer values. Therefore, solving the recursion for $F_n$ proves that \eqref{(3)} will always output integer values.
+\end{proof}
+
+Clearly, this proof is far less simple than that of Lemma \ref{Lemma 1}. Employing the recursion to allow for a \textit{direct proof} makes the argument appear less clear and logically reasoned. This is due to the necessity to proceed in the recursion's lengthy solution, the deferral from the main argument contributing to the lack of clarity. Moreover, the proof flirts with circular reasoning. This is due to its employment of the solution to the recurrence relation, in order to prove the theorem. Although the proof is completely valid, to be able to understand more intuitively why \eqref{(3)} always happens to produce integers, it may help to look at another style of proof which does not partake in the particular rigour of the kind just exhibited.
+
+\subsection{Domino/geometrical proof}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{Domino.png}
+    \caption{\citep{Brundan}}
+    \label{fig:1}
+\end{figure}
+
+\section{Tennis Club Problem}
+
+\subsection{Explanation and examples}
+\begin{problem} \label{Problem 1}
+    A tennis club has 1025 members and decides to hold a tournament to determine a winner. Every member draws a lot to see who will play whom during the first round. The odd man out receives a bye. The losers are out; the winners draw lots to play the next round with any extra person receiving a bye. This routine continues until there is only one person who remains a winner. How many matches will have to be played?
+\end{problem}
+
+
+\begin{proof}[Solution]
+    The games are played in pairs, and since losers are out, the number of people available to play in the next round will be halved. It is convenient that, 
+    \begin{equation*}
+        1025=2^{10}+1.
+    \end{equation*}
+    The ten in the exponent effectively means it will take division by two, or halving, a total of ten times to arrive at the final player. So, there will be ten rounds, with an additional final round for the extra odd player. There are $512$, or $2^9$ matches in the first round, and this too keeps halving - the second round will hold $256$ matches and so on. To count the number of individual matches, use the sum of a geometric series. In particular, the number of matches $M$ is,
+    \begin{alignat*}{2}
+        && M &= 2^9+2^8+2^7+\cdots+2^1+2^0+1 \\
+        \Leftrightarrow&& M &= 1 + \sum_{i=1}^{10} 2^{i-1} \\
+        \Leftrightarrow&& M &= 1 + \frac{u_1\left(r^{10}-1\right)}{r-1} \\
+        \Leftrightarrow&& M &= 1 + \frac{2^{10}-1}{2-1} \\
+        \Leftrightarrow&& M &= 1 + 2^{10} -1 \\
+        \Leftrightarrow&&\ M &= 1024.
+    \end{alignat*}
+    So, the number of individual matches played turns out to be 1024.
+\end{proof}
+
+You may notice that  $1025$ was a convenient number, since it is just one away from a power of two. You may also notice that the number of matches played is precisely one less than the number of members. It will help to try another example, with a different number of players, to test if this initial observation is a pattern.
+
+\begin{example} \label{Example 1}
+    This time, say there are $927$ members in the tennis club. Rules can be defined like so: ``if the number of players is odd, subtract or add one, then divide by two; if it is even, divide by two". Obviously in the first instance it will not make sense to add one, however after the first subtraction, it is valid to do so - there is a player in reserve. Keep in mind however, to add back all of the subtracted players, and never to add with no player in reserve. This helps maintain equality in the number of players. This way, it will be possible to reduce the number of players to one winner.
+    
+    To begin with, it will help to define the following arrows as operators, allowing for a simpler view of what is going on,
+    \begin{align*}
+        \rightarrow &\vcentcolon= -1, \\
+        \leftarrow &\vcentcolon= +1, \\
+        \downarrow &\vcentcolon= \div 2.
+    \end{align*}
+    With this in place, start reducing, \singlespacing
+    \begin{alignat*}{3}
+        937&&\ &\rightarrow{} &936 \\
+        && & &\downarrow \\
+        && & &468 \\
+        && & &\downarrow \\
+        && & &234 \\
+        && & &\downarrow \\
+        118&& &\leftarrow &117 \\
+        \downarrow&& & & \\
+        59&& &\rightarrow &58 \\
+        && & &\downarrow \\
+        30&& &\leftarrow &29 \\
+        \downarrow&& & &\\
+        15&& &\rightarrow &14 \\
+        && & &\downarrow \\
+        8&& & \leftarrow &7 \\
+        \downarrow&& & \\
+        4&& & & \\
+        \downarrow&& & & \\
+        2&& & & \\
+        \downarrow&& & & \\
+        1&&. & &
+    \end{alignat*} \doublespacing
+    The number of left and right arrows are equal, confirming no spurious additions of people. Now, counting the rounds is simple, it is just the number of down arrows, in this case ten. Further, it is clear that the number of matches in each round is the value below the down arrow. Therefore, to determine the total number of individual matches, just count every number below a down arrow. Namely,
+    \begin{equation*}
+        468+234+117+59+29+15+7+4+2+1 = 936.
+    \end{equation*}
+    
+    Evidently, the initial observation does seem to hold some truth, exhibited here yet again. Naturally, a mathematician would want to prove this, perhaps generalising certain things. As you will see, doing so is not at all straightforward, and the resulting proof is questionable.
+\end{example}
+
+\subsection{Proving it}
+\subsubsection{Arithmetically}
+To construct a \textit{direct proof} for Problem \ref{Problem 1} would be difficult. Consider the algorithm used for reduction in Example \ref{Example 1}; it is conditional, based on whether the number is odd or even. To encapsulate the parity of an integer in general form is very difficult. For instance, if $\Pi$ is allowed to represent the number of players, and it is said that $\Pi$ is even, there is no way to tell how many divisions by two it would take to arrive at an odd number. For this reason, mathematical induction appears the best approach to prove the results obtained in the previous subsection.
+
+\begin{theorem} \label{Theorem 2}
+    A tennis club with $n$ members will need to play $n-1$ matches to determine a winner.
+\end{theorem}
+
+\begin{proof}
+    The number of matches can be written on the right hand side of the equation, with the number of players, minus one, on the left hand side. Namely, for both examples discussed already,
+    \begin{align}
+        \label{(12)} 1024 &= 1025-1 \\
+        \label{(13)} 936 &= 937-1.
+    \end{align}
+    For $M_n$ representing the number of matches with $n$ players, \eqref{(12)} and \eqref{(13)} can be generalised to the assertion $A_n$,
+    \begin{equation}
+        M_n = n-1,\ \forall n \in \mathbb{Z}^{\geq2}.
+    \end{equation}
+    Testing for $A_2$,
+    \begin{equation*}
+        M_2 = \left(2\right)-1 = 1,\ \therefore A_2\ \text{holds}.
+    \end{equation*}
+    In other words, it is clear that to determine a winner out of two people, only one match needs to be played. Proceed to assume true up to $A_k$, namely,
+    \begin{equation*} \label{(IH)}
+        M_k = k-1,\ \text{for some}\ k \in \mathbb{Z}^{\geq2}.
+        \tag{IH}
+    \end{equation*}
+    Prove for $A_{k+1}$, working towards,
+    \begin{equation*}
+        M_{k+1} = \left(k+1\right)-1.
+    \end{equation*}
+    \begin{alignat*}{2}
+        && M_{k+1} &= M_k + 1 \\
+        \Leftrightarrow&&\ M_{k+1} &= \left(k-1\right) + 1 \tag{By \eqref{(IH)}}\\
+        \Leftrightarrow&& M_{k+1} &= \left(k+1\right) - 1,\ \text{as required},\ \therefore A_{k+1}\ \text{holds}.
+    \end{alignat*}
+    $A_2$ was shown to be true, and it was shown that $A_k$ holds $\Rightarrow A_{k+1}$ also holds. Hence, it follows by the principle of mathematical induction that $A_n$ is true $\forall n \in \mathbb{Z}^{\geq2}$.
+\end{proof}
+
+A very simple induction proof that needs to be subject to evaluation. In particular, it needs to be questioned what the proof is actually proving. In generalising \eqref{(12)} and \eqref{(13)}, it is essentially claimed that a certain number is equal to one less than its successor. In which case, it can be argued that the proof is merely proving a definition. However, by stating that $M_{k+1}=M_k +1$, a clear link is made to the dynamics of the system. Specifically, for a tennis club with $k$ members, the addition of an extra player will result in one additional match having to be played. Therefore, it can also be claimed that this link validates the proof into proving the system, not a definition.
+
+Aside from its details, this proof provides an insight into the disadvantages of on the so called ``rigorous proofs" - mathematical induction.
+
+\subsubsection{Verbally}
+Having employed the principle of mathematical induction, it is now known, in theory, that a tennis club with $n$ members will need to play $n-1$ matches to determine a winner. Despite this, the solution in general is still not understood. What particular characteristic of the system is responsible for this feature - the arithmetic, whilst displaying and holding true to the axioms of mathematics, fails to explain \textit{why} Theorem \ref{Theorem 2} is the case. Looking elsewhere, a solution exists that exercises solely pure thought, and provides an understanding as to why Theorem \ref{Theorem 2} holds true whatever the number of players.
+
+\begin{proof}
+    The mechanisms of the tournament are such that to win, you must not lose any games. This means that to arrive at \textit{one} winner, every member \textit{but one} must lose. Therefore, there must be as many matches as there are losers, since you can only lose once before you are out. Hence, it follows that the number of matches required to determine a winner is one less than the number of members in the club.
+\end{proof}
+
+\end{document}
