@@ -25,10 +25,49 @@
 
         <p>A poster will be uploaded soon.</p>
         </li>
+        <li>
+            <strong>UCL Year 1 Research Project</strong>
+            <p>Description to be posted soon.</p>
+        
+            <p><strong>Materials:</strong></p>
+            <ul>
+                <li>To be uploaded soon</li>
+            </ul>
+
+        <p>I will include any comments here.</p>
+        </li>
+        <li>
+            <strong>Mathematics Pedagogy</strong>
+            <p>Description to be posted soon.</p>
+        
+            <p><strong>Materials:</strong></p>
+            <ul>
+                <li>To be uploaded soon</li>
+            </ul>
+
+        <p>I will include any comments here.</p>
+        </li>
+        <li>
+            <strong>Problems in elementary combinatorics</strong>
+            <p>Description to be posted soon.</p>
+        
+            <p><strong>Materials:</strong></p>
+            <ul>
+                <li>To be uploaded soon</li>
+            </ul>
+
+        <p>I will include any comments here.</p>
+        </li>
     </ul>
 
     <footer>
-        <p>Last updated: October 8, 2024</p>
+        <p>Last updated: <span id="last-updated"></span></p>
     </footer>
+
+    <script>
+        const date = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('last-updated').textContent = date.toLocaleDateString('en-US', options);
+    </script>
 </body>
 </html>
